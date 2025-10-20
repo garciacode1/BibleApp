@@ -9,16 +9,25 @@
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private async void OnSearchClicked(object sender, EventArgs e)
         {
-            count++;
+            var query = SearchEntry.Text?.Trim();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                await DisplayAlert("Search", "Type something to search.", "OK");
+                return;
+            }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            await DisplayAlert("Search",
+                $"You typed:\n\n{query}\n\n(We'll connect this to the Bible API later.)",
+                "OK");
+        }
+
+        // Go to the reading page starting at Genesis 1 (placeholder for now)
+        private async void OnReadSequentiallyClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync($"{nameof(ReadPage)}?book=Genesis&chapter=1");
         }
     }
 }

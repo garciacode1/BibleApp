@@ -1,8 +1,8 @@
 namespace BibleApp;
 
-public partial class NewPage1 : ContentPage
+public partial class ReadPage : ContentPage
 {
-	public NewPage1()
+	public ReadPage()
 	{
 		InitializeComponent();
 	}

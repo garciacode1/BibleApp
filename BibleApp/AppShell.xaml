@@ -6,9 +6,12 @@
     xmlns:local="clr-namespace:BibleApp"
     Title="BibleApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- Bottom tabs for your 4 screens -->
+    <TabBar>
+        <ShellContent Title="Home"     ContentTemplate="{DataTemplate local:MainPage}" />
+        <ShellContent Title="Books"    ContentTemplate="{DataTemplate local:BooksPage}" />
+        <ShellContent Title="Favorites" ContentTemplate="{DataTemplate local:FavoritesPage}" />
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </TabBar>
 
 </Shell>
