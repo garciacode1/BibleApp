@@ -68,6 +68,9 @@
 	  <Compile Update="ReadPage.xaml.cs">
 	    <DependentUpon>ReadPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SettingsPage.xaml.cs">
+	    <DependentUpon>SettingsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,9 +83,13 @@
 	  <MauiXaml Update="ReadPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Settings.xaml">
+	  <MauiXaml Update="SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Services\Service_API\" />
 	</ItemGroup>
 
 </Project>

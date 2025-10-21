@@ -1,48 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibleApp.MainPage">
+<ContentPage
+    x:Class="BibleApp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Bible GPT">
+    <Grid>
+        <!-- BACKGROUND IMAGE -->
+        <Image Source="main_image.png"
+               Aspect="AspectFill"
+               Opacity="0.3"
+               ZIndex="0" />
 
-    <ScrollView>
+    <!-- Scrollable container for all content -->
+     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <!-- App title -->
-            <Label Text="BIBLE · GPT"
-                   FontSize="32"
+            <!-- TITLE -->
+            <Label Text="BIBLE - GPT"
+                   FontSize="40"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+                   Margin="0,0,0,0"
+                   HorizontalOptions="Center"
+                   TextColor="Purple"
+                   />
+            <Label Text="Digital Bible accesible for everyone!"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"
+                   TextDecorations="Underline"
+                   TextColor="Purple"
+                   
+                   />
+            <Label Text="Looking for specific Chapter or verse?"
+                       FontAttributes="Italic"
+                       HorizontalOptions="Center"
+                       Padding="0,0,0,0"
+                       
+                       
+                   />
 
-            <!-- Search row -->
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                <!-- SEARCH BAR -->
+            <Grid ColumnDefinitions="*,Auto"
+                  Margin="0,20,0,50"> 
+                    
                 <Entry x:Name="SearchEntry"
-                       Placeholder="Search (e.g., 'John 3:16' or 'love')"
-                       ReturnType="Search" />
+                       Placeholder="Search for specific chapter"
+                       ReturnType="Search"
+                       BackgroundColor="White"
+                       TextColor="Black"/>
                 <Button Grid.Column="1"
                         Text="Search"
                         Clicked="OnSearchClicked" />
             </Grid>
-
-            <!-- Read sequentially card -->
-            <Frame Padding="14" CornerRadius="12" BorderColor="#D9D9D9">
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="Read sequentially" FontAttributes="Bold" FontSize="18" />
-                    <Label Text="Start at Genesis 1 (you can change this later)"
-                           FontSize="12" TextColor="#666" />
-                    <Button Text="Start reading"
-                            x:Name="ReadSequentiallyButton"
+           
+            <!-- READ SEQUENTIALLY CARD -->
+            <Border Stroke="#D9D9D9" StrokeShape="RoundRectangle 12"
+                    BackgroundColor="Beige">
+                <VerticalStackLayout Padding="5" Spacing="10">
+                    <Label Text="Read Sequentially"
+                           FontAttributes="Bold"
+                           FontSize="18" />
+                    <Label Text="Dont know how to start?"
+                           FontSize="13"
+                           TextColor="#666" />
+                    <Label FontSize="13"
+                               TextColor="#666"
+                               Text="Click to start from Genesis 1"/>
+                                        
+                    <Button Text="Start Reading"
                             Clicked="OnReadSequentiallyClicked" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
-            <!-- Quick tips (optional) -->
-            <Label Text="Tips:"
-                   FontAttributes="Bold" />
-            <Label Text="• Use the tabs below to open Books, Favorites, or Settings."
-                   FontSize="12" TextColor="#666"/>
-            <Label Text="• The Search button will call the API later."
-                   FontSize="12" TextColor="#666"/>
+            <!-- FOOTER TIPS -->
+            <Label Text="Tips:" FontAttributes="Bold" />
+            <Label Text="• Tap the book icon below to select a specific book."
+                   FontSize="12" TextColor="#666" />
+            <Label Text="• The search bar will use the API later."
+                   FontSize="12" TextColor="#666" />
 
         </VerticalStackLayout>
     </ScrollView>
-
+   </Grid>
 </ContentPage>
+
