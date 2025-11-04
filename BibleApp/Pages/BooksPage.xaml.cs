@@ -1,4 +1,4 @@
-namespace BibleApp;
+namespace BibleApp.Pages;
 
 public partial class BooksPage : ContentPage
 {

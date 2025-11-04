@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="BibleApp.MainPage"
+    x:Class="BibleApp.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bible GPT">
     <Grid>
-        <!-- BACKGROUND IMAGE -->
+        <!-- background image -->
         <Image Source="main_image.png"
                Aspect="AspectFill"
                Opacity="0.3"
-               ZIndex="0" />
+               ZIndex="0" 
+        />
 
     <!-- Scrollable container for all content -->
      <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <!-- TITLE -->
+            <!-- title -->
             <Label Text="BIBLE - GPT"
                    FontSize="40"
                    FontAttributes="Bold"
-                   Margin="0,0,0,0"
+                   Margin="0,10,0,0"
                    HorizontalOptions="Center"
                    TextColor="Purple"
-                   />
+            />
             <Label Text="Digital Bible accesible for everyone!"
                    FontAttributes="Italic"
                    HorizontalOptions="Center"
@@ -30,16 +31,16 @@
                    TextDecorations="Underline"
                    TextColor="Purple"
                    
-                   />
+            />
             <Label Text="Looking for specific Chapter or verse?"
                        FontAttributes="Italic"
                        HorizontalOptions="Center"
-                       Padding="0,0,0,0"
+                       Padding="0,30,0,0"
                        
                        
-                   />
+            />
 
-                <!-- SEARCH BAR -->
+                <!-- search bar -->
             <Grid ColumnDefinitions="*,Auto"
                   Margin="0,20,0,50"> 
                     
@@ -53,7 +54,7 @@
                         Clicked="OnSearchClicked" />
             </Grid>
            
-            <!-- READ SEQUENTIALLY CARD -->
+            <!-- read sequentally space -->
             <Border Stroke="#D9D9D9" StrokeShape="RoundRectangle 12"
                     BackgroundColor="Beige">
                 <VerticalStackLayout Padding="5" Spacing="10">
@@ -72,12 +73,11 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- FOOTER TIPS -->
-            <Label Text="Tips:" FontAttributes="Bold" />
+            <!-- footer -->
+            <Label Text="Navigation:" FontAttributes="Italic" />
             <Label Text="• Tap the book icon below to select a specific book."
                    FontSize="12" TextColor="#666" />
-            <Label Text="• The search bar will use the API later."
-                   FontSize="12" TextColor="#666" />
+            
 
         </VerticalStackLayout>
     </ScrollView>

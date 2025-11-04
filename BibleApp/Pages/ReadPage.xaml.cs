@@ -1,4 +1,4 @@
-namespace BibleApp;
+namespace BibleApp.Pages;
 
 [QueryProperty(nameof(Book), "book")]
 [QueryProperty(nameof(Chapter), "chapter")]

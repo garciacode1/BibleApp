@@ -3,14 +3,14 @@
     x:Class="BibleApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BibleApp">
+    xmlns:pages="clr-namespace:BibleApp.Pages">
 
     <!-- Bottom tabs for your 4 screens -->
     <TabBar>
-        <ShellContent Title="Home"     ContentTemplate="{DataTemplate local:MainPage}" />
-        <ShellContent Title="Books"    ContentTemplate="{DataTemplate local:BooksPage}" />
-        <ShellContent Title="Favorites" ContentTemplate="{DataTemplate local:FavoritesPage}" />
-        <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        <ShellContent Title="Home"     ContentTemplate="{DataTemplate pages:MainPage}" />
+        <ShellContent Title="Books"    ContentTemplate="{DataTemplate pages:BooksPage}" />
+        <ShellContent Title="Favorites" ContentTemplate="{DataTemplate pages:FavoritesPage}" />
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
     </TabBar>
 
 </Shell>
