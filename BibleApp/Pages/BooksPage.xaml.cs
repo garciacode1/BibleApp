@@ -32,17 +32,18 @@ public partial class BooksPage : ContentPage
         }
     }
 
-    // This function runs when you tap one of the books
     private async void OnBookSelected(object sender, SelectionChangedEventArgs e)
     {
-        // Get the book you clicked on
+        // Get the book that the user tapped on
         var selectedBook = e.CurrentSelection.FirstOrDefault() as Books;
 
-        // If something was actually selected, show its name
-        if (selectedBook != null)
-        {
-            await DisplayAlert("Book Selected", selectedBook.Name, "OK");
-            // Later you will open the next page here (Chapters page)
-        }
+        // Make sure a book was really selected
+        if (selectedBook == null)
+            return;
+
+        // Go to the ChaptersPage and send it the Book ID and Book Name
+        await Navigation.PushAsync(new ChaptersPage(selectedBook.Id, selectedBook.Name));
     }
+
+
 }

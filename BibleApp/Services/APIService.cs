@@ -42,14 +42,35 @@ namespace BibleApp.Services
 
             return booksResponse?.Data ?? new List<Books>();
 
+        }
+        
+        //Get chapters method
 
+        public async Task<List<string>> GetChapters(string bookId)
+        {
+            HttpClient client = new HttpClient();
 
+            // Build the endpoint using the same default Bible ID
+            string url = $"{baseURL}/{defaultBibleId}/books/{bookId}/chapters";
 
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("api-key", apiKey);
 
+            //send request 
+            var response = await client.SendAsync(request);
+            string json = await response.Content.ReadAsStringAsync();
 
+            var jsonObject = JsonConvert.DeserializeObject<dynamic>(json);
+            var chapters = new List<string>();
 
+            foreach (var item in jsonObject.data)
+            {
+                chapters.Add((string)item.id);
+            }
 
-
+            
+            return chapters;
         }
 
 

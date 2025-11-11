@@ -9,8 +9,11 @@
     <TabBar>
         <ShellContent Title="Home"     ContentTemplate="{DataTemplate pages:MainPage}" />
         <ShellContent Title="Books"    ContentTemplate="{DataTemplate pages:BooksPage}" />
+        <ShellContent Title="Chapters" ContentTemplate="{DataTemplate pages:ChaptersPage}" />
         <ShellContent Title="Favorites" ContentTemplate="{DataTemplate pages:FavoritesPage}" />
         <ShellContent Title="Settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
+        
+        
     </TabBar>
 
 </Shell>

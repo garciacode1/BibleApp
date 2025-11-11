@@ -7,7 +7,8 @@
         <Label x:Name="BookTitleLabel"
                FontSize="22"
                FontAttributes="Bold"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center" 
+               Text="Loading chapters..." />
 
         <CollectionView x:Name="ChaptersCollectionView"
                         Margin="10"
