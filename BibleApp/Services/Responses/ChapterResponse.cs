@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace BibleApp.Services.Responses
 {
-    internal class ChapterResponse
+    public class ChapterResponse
     {
+        public string Id { get; set; }
+        public int Chapter { get; set; }
+        public string Reference { get; set; }
+
+        public override string ToString()
+        {
+            // This controls what appears in the CollectionView list
+            return Reference ?? Id;
+        }
     }
 }
