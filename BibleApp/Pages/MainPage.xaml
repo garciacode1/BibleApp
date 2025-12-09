@@ -25,48 +25,34 @@
                    TextColor="Purple"
             />
             <Label Text="Digital Bible accesible for everyone!"
-                   FontAttributes="Italic"
+                   FontAttributes="Bold"
                    HorizontalOptions="Center"
                    Margin="0,0,0,20"
                    TextDecorations="Underline"
                    TextColor="Purple"
                    
             />
-            <Label Text="Looking for specific Chapter or verse?"
+            <Label Text="You are not sure where to start?"
                        FontAttributes="Italic"
                        HorizontalOptions="Center"
                        Padding="0,30,0,0"
                        
                        
             />
-
-                <!-- search bar -->
-            <Grid ColumnDefinitions="*,Auto"
-                  Margin="0,20,0,50"> 
-                    
-                <Entry x:Name="SearchEntry"
-                       Placeholder="Search for specific chapter"
-                       ReturnType="Search"
-                       BackgroundColor="White"
-                       TextColor="Black"/>
-                <Button Grid.Column="1"
-                        Text="Search"
-                        Clicked="OnSearchClicked" />
-            </Grid>
            
             <!-- read sequentally space -->
             <Border Stroke="#D9D9D9" StrokeShape="RoundRectangle 12"
                     BackgroundColor="Beige">
-                <VerticalStackLayout Padding="5" Spacing="10">
+                <VerticalStackLayout Padding="8" Spacing="18">
                     <Label Text="Read Sequentially"
                            FontAttributes="Bold"
                            FontSize="18" />
-                    <Label Text="Dont know how to start?"
-                           FontSize="13"
+                    <Label Text="Read sequentially allows you to start your journey from the very beggining of the Bible!"
+                           FontSize="14"
                            TextColor="#666" />
                     <Label FontSize="13"
                                TextColor="#666"
-                               Text="Click to start from Genesis 1"/>
+                               Text="Click to start reading from Genesis 1"/>
                                         
                     <Button Text="Start Reading"
                             Clicked="OnReadSequentiallyClicked" />

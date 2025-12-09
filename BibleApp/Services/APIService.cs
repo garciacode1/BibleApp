@@ -50,7 +50,6 @@ namespace BibleApp.Services
         {
             HttpClient client = new HttpClient();
 
-            // Build the endpoint using the same default Bible ID
             string url = $"{baseURL}/{defaultBibleId}/books/{bookId}/chapters";
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);

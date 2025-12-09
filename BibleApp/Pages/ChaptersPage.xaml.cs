@@ -19,7 +19,6 @@ public partial class ChaptersPage : ContentPage
         bookId = selectedBookId ?? string.Empty;
         bookName = selectedBookName ?? "Unknown Book";
 
-        // label text yet will be set after loading
         LoadChapters();
     }
 
@@ -29,16 +28,16 @@ public partial class ChaptersPage : ContentPage
     {
         try
         {
-            // Show a loading indicator while getting data
+            
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 BookTitleLabel.Text = $"Loading chapters in {bookName}...";
             });
 
-            // Fetch chapters from the API (runs on background thread)
+            
             var chapters = await Task.Run(() => apiService.GetChapters(bookId));
 
-            // Back to main thread to update the CollectionView
+            
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 ChaptersCollectionView.ItemsSource = chapters;
