@@ -32,7 +32,7 @@
                    TextColor="Purple"
                    
             />
-            <Label Text="You are not sure where to start?"
+            <Label Text="Not sure where to begin?"
                        FontAttributes="Italic"
                        HorizontalOptions="Center"
                        Padding="0,30,0,0"
@@ -46,13 +46,16 @@
                 <VerticalStackLayout Padding="8" Spacing="18">
                     <Label Text="Read Sequentially"
                            FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
                            FontSize="18" />
-                    <Label Text="Read sequentially allows you to start your journey from the very beggining of the Bible!"
+                        <Label Text="Begin at Genesis 1 and continue chapter by chapter."
                            FontSize="14"
+                            HorizontalTextAlignment="Center"
                            TextColor="#666" />
-                    <Label FontSize="13"
+                    <Label FontSize="14"
                                TextColor="#666"
-                               Text="Click to start reading from Genesis 1"/>
+                               Text="Start your journey below."
+                               HorizontalTextAlignment="Center"           />
                                         
                     <Button Text="Start Reading"
                             Clicked="OnReadSequentiallyClicked" />

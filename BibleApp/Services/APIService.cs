@@ -5,6 +5,7 @@ using System;
 using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
@@ -19,28 +20,48 @@ namespace BibleApp.Services
 
         public APIService() { }
 
-        public async Task<List<Books>> GetBooks()
+
+
+        //get books method
+        public async Task<List<Books>> GetBooks()   
         {
 
-            //Get an HTTP Client
+            try
+            {
+                
+                HttpClient client = new HttpClient();
+                string url = $"{baseURL}/{defaultBibleId}/books";
+                
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+                request.Headers.Add("api-key", apiKey);
+              
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK ||
+                    response.Content == null)
+                {
+                    await App.Current.MainPage.DisplayAlert(
+                        "Error",
+                        $"Status code: {response.StatusCode}",
+                        "OK");
+                    return new List<Books>();
+                }
+               
+                string json = await response.Content.ReadAsStringAsync();
+             
+                BooksResponse? result = JsonConvert.DeserializeObject<BooksResponse>(json);
+                if (result != null && result.Data != null)
+                {
+                    return result.Data;
+                }
 
-            HttpClient client = new HttpClient();
-
-            //full URL
-
-            string url = $"{baseURL}/{defaultBibleId}/books";
-
-            //Form a request 
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("api-key", apiKey);
-
-            var response = await client.SendAsync(request);
-            string json = await response.Content.ReadAsStringAsync();
-
-            var booksResponse = JsonConvert.DeserializeObject<BooksResponse>(json);
-
-            return booksResponse?.Data ?? new List<Books>();
+                return new List<Books>();
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Exception",ex.Message,"OK");
+                return new List<Books>(); //Prevent crashing
+            }
 
         }
         

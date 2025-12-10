@@ -11,37 +11,37 @@ public partial class BooksPage : ContentPage
     public BooksPage()
     {
         InitializeComponent(); 
-        LoadBooks();           
+                 
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
 
-    
+        await LoadBooks(); 
+    }
     private async Task LoadBooks()
     {
         try
         {
-            
             var books = await apiService.GetBooks();
             BooksCollectionView.ItemsSource = books;
         }
         catch (Exception ex)
         {
-            
             await DisplayAlert("Error", "Could not load books: " + ex.Message, "OK");
         }
     }
-
-     
-
     private async void OnBookSelected(object sender, SelectionChangedEventArgs e)
     {
-        
         var selectedBook = e.CurrentSelection.FirstOrDefault() as Books;
 
         if (selectedBook == null)
-            return;
-
+            return; 
         await Navigation.PushAsync(new ChaptersPage(selectedBook.Id, selectedBook.Name));
+        BooksCollectionView.SelectedItem = null;
     }
+
+
 
 
 }
