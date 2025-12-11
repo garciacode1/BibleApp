@@ -27,7 +27,7 @@ public partial class ChaptersPage : ContentPage
     {
         try
         {
-            BookTitleLabel.Text = $"Loading chapters in {bookName}...";
+            BookTitleLabel.Text = "Loading chapters...";
 
             //Get chapters for book
             var chapters = await apiService.GetChapters(bookId);
@@ -43,14 +43,15 @@ public partial class ChaptersPage : ContentPage
 
     }
   
-    private void ChaptersCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void ChaptersCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        //checks something was selected
         if (e.CurrentSelection == null || e.CurrentSelection.Count == 0)
             return;
 
         Chapter selected = (Chapter)e.CurrentSelection[0];
-
-        DisplayAlert("Chapter Selected", "You selected: " + selected.Reference, "OK");
+        //navigate from chapter to read page
+        await Navigation.PushAsync(new ReadPage(selected.Id, selected.Reference));
 
         // remove highlight
         ((CollectionView)sender).SelectedItem = null;

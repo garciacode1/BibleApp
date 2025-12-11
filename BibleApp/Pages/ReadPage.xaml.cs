@@ -1,27 +1,53 @@
 namespace BibleApp.Pages;
+using BibleApp.Services;
+using BibleApp.Services.Responses;
+using System.Reflection.Metadata;
 
-[QueryProperty(nameof(Book), "book")]
-[QueryProperty(nameof(Chapter), "chapter")]
 public partial class ReadPage : ContentPage
 {
-    public string Book { get; set; } = "Genesis";
-    public string Chapter { get; set; } = "1";
 
-    public ReadPage()
+    private readonly APIService api = new();
+    private readonly string chapterId;
+    private readonly string chapterRef;
+
+    public ReadPage(string chapterId, string reference)
     {
         InitializeComponent();
-        UpdateHeader();
+
+        this.chapterId = chapterId;
+        this.chapterRef = reference;
+
+        LoadChapter();
+
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    private async void LoadChapter()
     {
-        base.OnNavigatedTo(args);
-        UpdateHeader();
+        ChapterTitleLabel.Text = "Loading chapter...";
+        //api request for text
+        var chapter = await api.GetChapterText(chapterId);
+        //error checking if API didnt return anything
+        if (chapter == null)
+        {
+            ChapterTitleLabel.Text = "Error to load this chapter. ";
+            return;
+        }
+        //title of chapter
+        ChapterTitleLabel.Text = chapter.Reference;
+        //cleaned text from html format
+        string CleanedText = chapter.Content
+                                    .Replace("<p>", "")
+                                    .Replace("</p>", "")
+                                    .Replace("<span>", "")
+                                    .Replace("</span>", "");
+
+        ChapterContentLabel.Text = CleanedText;
+
+
+
     }
 
-    private void UpdateHeader()
-    {
-        if (HeaderLabel != null)
-            HeaderLabel.Text = $"{Book} {Chapter}";
-    }
+
+
+
 }
