@@ -13,14 +13,14 @@
         <CollectionView x:Name="ChaptersCollectionView"
                         Margin="10"
                         SelectionMode="Single"
-                        SelectionChanged="OnChapterSelected">
+                        SelectionChanged="ChaptersCollectionView_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Stroke="LightGray"
                             StrokeShape="RoundRectangle 8"
                             Padding="10"
                             Margin="5">
-                        <Label Text="{Binding}" 
+                        <Label Text="{Binding Reference}" 
                                FontSize="18"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" />

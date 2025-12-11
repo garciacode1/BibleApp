@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 
 
+
 namespace BibleApp.Pages;
 
 public partial class ChaptersPage : ContentPage
@@ -22,27 +23,17 @@ public partial class ChaptersPage : ContentPage
         LoadChapters();
     }
 
-   
-
     private async void LoadChapters()
     {
         try
         {
-            
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                BookTitleLabel.Text = $"Loading chapters in {bookName}...";
-            });
+            BookTitleLabel.Text = $"Loading chapters in {bookName}...";
 
-            
-            var chapters = await Task.Run(() => apiService.GetChapters(bookId));
+            //Get chapters for book
+            var chapters = await apiService.GetChapters(bookId);
 
-            
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                ChaptersCollectionView.ItemsSource = chapters;
-                BookTitleLabel.Text = $"Chapters in {bookName}";
-            });
+            ChaptersCollectionView.ItemsSource = chapters;
+            BookTitleLabel.Text = $"Chapters in {bookName}";
         }
         catch (Exception ex)
         {
@@ -50,29 +41,18 @@ public partial class ChaptersPage : ContentPage
         }
 
 
-
     }
-
-    private async void OnChapterSelected(object sender, SelectionChangedEventArgs e)
+  
+    private void ChaptersCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var selectedChapter = e.CurrentSelection.FirstOrDefault()?.ToString();
-        if (selectedChapter != null)
-            await DisplayAlert("Chapter selected", $"You selected chapter {selectedChapter}", "OK");
+        if (e.CurrentSelection == null || e.CurrentSelection.Count == 0)
+            return;
+
+        Chapter selected = (Chapter)e.CurrentSelection[0];
+
+        DisplayAlert("Chapter Selected", "You selected: " + selected.Reference, "OK");
+
+        // remove highlight
+        ((CollectionView)sender).SelectedItem = null;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

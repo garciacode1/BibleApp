@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
+using System.Net.Http;
 
 namespace BibleApp.Services
 {
@@ -16,37 +17,36 @@ namespace BibleApp.Services
     {
         const string apiKey = "47455fdb12c865888b79736cf85c5515";
         const string baseURL = "https://api.scripture.api.bible/v1/bibles";
-        const string defaultBibleId = "de4e12af7f28f599-01"; // King James (Authorised) Version
+        const string defaultBibleId = "de4e12af7f28f599-01"; //King James (Authorised) Version
 
         public APIService() { }
 
 
 
-        //get books method
+        //Get Books Method
         public async Task<List<Books>> GetBooks()   
         {
 
             try
             {
-                
+                //Get Http Client
                 HttpClient client = new HttpClient();
                 string url = $"{baseURL}/{defaultBibleId}/books";
-                
+                //Form a request
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
+                //Headers
                 request.Headers.Add("Accept", "application/json");
                 request.Headers.Add("api-key", apiKey);
-              
+                //send request 
                 HttpResponseMessage response = await client.SendAsync(request);
+                //error handling
                 if (response.StatusCode != System.Net.HttpStatusCode.OK ||
                     response.Content == null)
                 {
-                    await App.Current.MainPage.DisplayAlert(
-                        "Error",
-                        $"Status code: {response.StatusCode}",
-                        "OK");
+                    await App.Current.MainPage.DisplayAlert("Error",$"Status code: {response.StatusCode}","OK");
                     return new List<Books>();
                 }
-               
+                
                 string json = await response.Content.ReadAsStringAsync();
              
                 BooksResponse? result = JsonConvert.DeserializeObject<BooksResponse>(json);
@@ -67,30 +67,50 @@ namespace BibleApp.Services
         
         //Get chapters method
 
-        public async Task<List<string>> GetChapters(string bookId)
+        public async Task<List<Chapter>> GetChapters(string bookId)
         {
-            HttpClient client = new HttpClient();
-
-            string url = $"{baseURL}/{defaultBibleId}/books/{bookId}/chapters";
-
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("api-key", apiKey);
-
-            //send request 
-            var response = await client.SendAsync(request);
-            string json = await response.Content.ReadAsStringAsync();
-
-            var jsonObject = JsonConvert.DeserializeObject<dynamic>(json);
-            var chapters = new List<string>();
-
-            foreach (var item in jsonObject.data)
+            try
             {
-                chapters.Add((string)item.id);
-            }
+                HttpClient client = new HttpClient();
 
-            
-            return chapters;
+                string url = $"{baseURL}/{defaultBibleId}/books/{bookId}/chapters";
+                // request with headers
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+                request.Headers.Add("api-key", apiKey);
+
+                HttpResponseMessage response = await client.SendAsync(request);
+                 //error checking
+                if (response.StatusCode != System.Net.HttpStatusCode.OK ||
+                    response.Content == null)
+                {
+                    await App.Current.MainPage.DisplayAlert(
+                        "Error",
+                        $"Status code: {response.StatusCode}",
+                        "OK");
+
+                    return new List<Chapter>();
+                }
+
+                //Read the JSON
+                string json = await response.Content.ReadAsStringAsync();
+
+                // 7. Convert JSON into C# object
+                ChaptersResponse? result = JsonConvert.DeserializeObject<ChaptersResponse>(json);
+
+                //Always return a safe list
+                if (result != null && result.Data != null)
+                {
+                    return result.Data;
+                }
+
+                return new List<Chapter>();
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Exception", ex.Message, "OK");
+                return new List<Chapter>();
+            }
         }
 
 
