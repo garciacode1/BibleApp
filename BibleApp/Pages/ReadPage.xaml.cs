@@ -1,8 +1,9 @@
 namespace BibleApp.Pages;
 using BibleApp.Services;
 using BibleApp.Services.Responses;
-using System.Text.RegularExpressions;
 using System.Net;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 [QueryProperty(nameof(ChapterId), "chapterId")]
 [QueryProperty(nameof(Reference), "reference")]
@@ -22,13 +23,13 @@ public partial class ReadPage : ContentPage
 
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        LoadChapter ();
+        await LoadChapter ();
     }
 
-    private async void LoadChapter()
+    private async Task LoadChapter()
     {
         ChapterTitleLabel.Text = "Loading chapter...";
         //api request for text
@@ -50,10 +51,14 @@ public partial class ReadPage : ContentPage
     {
         if (string.IsNullOrEmpty(html)) return string.Empty;
         //remove html tags
-        string noTags = Regex.Replace(html, "<.*?>", string.Empty);
+        string text = Regex.Replace(html, "<.*?>", string.Empty);
+        //decode httml entities
+        text = WebUtility.HtmlDecode(text);  //decode htmlentities
+        text = text.Replace("¶", ""); //decode symbols
 
-        string decoded = WebUtility.HtmlDecode(noTags);
-        return decoded.Trim();
+        text = Regex.Replace(text, @"(\d+)(?=[A-Za-z])", "\n$1 "); //adds line before verse number
+
+        return text.Trim();
 
 
     }
