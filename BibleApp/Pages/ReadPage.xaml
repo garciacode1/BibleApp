@@ -6,6 +6,20 @@
     Title="Read">
 
     <ScrollView>
+        <ScrollView.GestureRecognizers>
+
+            <!-- Swipe LEFT = Next -->
+            <SwipeGestureRecognizer
+          Direction="Left"
+          Swiped="OnSwipedLeft" />
+
+            <!-- Swipe RIGHT = Previous -->
+            <SwipeGestureRecognizer
+           Direction="Right"
+           Swiped="OnSwipedRight" />
+
+        </ScrollView.GestureRecognizers>
+        
         <VerticalStackLayout Padding="20">
             <!--  chapter title -->
             <Label x:Name="ChapterTitleLabel"

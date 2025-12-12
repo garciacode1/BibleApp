@@ -10,15 +10,17 @@ public partial class BooksPage : ContentPage
 
     public BooksPage()
     {
-        InitializeComponent(); 
-                 
+        InitializeComponent();
+
     }
+
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        await LoadBooks(); 
+        await LoadBooks();
     }
+
     private async Task LoadBooks()
     {
         try
@@ -31,6 +33,7 @@ public partial class BooksPage : ContentPage
             await DisplayAlert("Error", "Could not load books: " + ex.Message, "OK");
         }
     }
+
     private async void OnBookSelected(object sender, SelectionChangedEventArgs e)
     {
         var selectedBook = e.CurrentSelection.FirstOrDefault() as Books;

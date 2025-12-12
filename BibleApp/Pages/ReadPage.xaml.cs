@@ -51,9 +51,10 @@ public partial class ReadPage : ContentPage
         //parse book and chapter when page loads
         var parts = Reference.Split(' ');
         currentChapter = int.Parse(parts.Last());
-        
+
 
     }
+
     private string CleanHtml(string html)
     {
         if (string.IsNullOrEmpty(html)) return string.Empty;
@@ -77,7 +78,7 @@ public partial class ReadPage : ContentPage
 
         currentChapter++;
 
-        await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" + 
+        await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" +
             $"&chapterId={BookId}.{currentChapter}" + $"&reference={Uri.EscapeDataString($"{BookId} {currentChapter}")}");
     }
 
@@ -93,6 +94,27 @@ public partial class ReadPage : ContentPage
 
 
     }
+
+    private void OnSwipedLeft(object sender, SwipedEventArgs e)
+    {
+
+        OnNextClicked(sender, EventArgs.Empty);
+
+
+    }
+
+    private void OnSwipedRight(object sender, SwipedEventArgs e) 
+    {
+
+        OnPreviousClicked(sender, EventArgs.Empty);
+      
+    }
+
+
+
+
+
+
 
 
 
