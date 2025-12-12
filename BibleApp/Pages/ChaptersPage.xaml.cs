@@ -54,8 +54,9 @@ public partial class ChaptersPage : ContentPage
 
         Chapter selected = (Chapter)e.CurrentSelection[0];
         //navigate from chapter to read page
-        await Shell.Current.GoToAsync($"{nameof(ReadPage)}?chapterId={selected.Id}&reference={selected.Reference}"
-);
+        await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" + $"&chapterId={selected.Id}" +
+                                                            $"&reference={Uri.EscapeDataString(selected.Reference)}");
+
 
 
         // remove highlight

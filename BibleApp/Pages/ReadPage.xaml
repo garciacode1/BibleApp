@@ -18,6 +18,13 @@
                    FontSize="18"
                    LineBreakMode="WordWrap"
                    TextColor="Black"/>
+            <!-- Navigation buttons -->
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Button Text="◀ Previous" Clicked="OnPreviousClicked"/>
+                <Button Text="Next ▶" Clicked="OnNextClicked"/>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
+        
+
     </ScrollView>
 </ContentPage>

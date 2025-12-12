@@ -55,7 +55,7 @@
                     <Label FontSize="14"
                                TextColor="#666"
                                Text="Start your journey below."
-                               HorizontalTextAlignment="Center"           />
+                               HorizontalTextAlignment="Center" />
                                         
                     <Button Text="Start Reading"
                             Clicked="OnReadSequentiallyClicked" />
@@ -63,10 +63,11 @@
             </Border>
 
             <!-- footer -->
-            <Label Text="Navigation:" FontAttributes="Italic" />
-            <Label Text="• Tap the book icon below to select a specific book."
-                   FontSize="12" TextColor="#666" />
-            
+                <Label Text="Or select a book from the Books tap below."
+                       FontAttributes="Italic"
+                       HorizontalOptions="Center"
+                       Padding="0,30,0,0"
+                 />
 
         </VerticalStackLayout>
     </ScrollView>

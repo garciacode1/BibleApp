@@ -5,16 +5,19 @@ using System.Net;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
+[QueryProperty(nameof(BookId), "bookId")]
 [QueryProperty(nameof(ChapterId), "chapterId")]
 [QueryProperty(nameof(Reference), "reference")]
 
 public partial class ReadPage : ContentPage
 {
-    
+
 
     private readonly APIService api = new();
 
-    public string ChapterId { get; set;}
+    public int currentChapter;
+    public string BookId { get; set; }
+    public string ChapterId { get; set; }
     public string Reference { get; set; }
 
     public ReadPage()
@@ -26,7 +29,7 @@ public partial class ReadPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await LoadChapter ();
+        await LoadChapter();
     }
 
     private async Task LoadChapter()
@@ -45,6 +48,10 @@ public partial class ReadPage : ContentPage
         //cleaned text from html format
         string CleanedText = CleanHtml(chapter.Content);
         ChapterContentLabel.Text = CleanedText;
+        //parse book and chapter when page loads
+        var parts = Reference.Split(' ');
+        currentChapter = int.Parse(parts.Last());
+        
 
     }
     private string CleanHtml(string html)
@@ -62,6 +69,34 @@ public partial class ReadPage : ContentPage
 
 
     }
+
+    private async void OnNextClicked(object sender, EventArgs e)
+    {
+        if (currentChapter <= 0)
+            return;
+
+        currentChapter++;
+
+        await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" + 
+            $"&chapterId={BookId}.{currentChapter}" + $"&reference={Uri.EscapeDataString($"{BookId} {currentChapter}")}");
+    }
+
+    private async void OnPreviousClicked(object sender, EventArgs e)
+    {
+        if (currentChapter <= 1)
+            return;
+
+        currentChapter--;
+
+        await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" + $"&chapterId={BookId}.{currentChapter}" +
+            $"&reference={Uri.EscapeDataString($"{BookId} {currentChapter}")}");
+
+
+    }
+
+
+
+
 
 
 
