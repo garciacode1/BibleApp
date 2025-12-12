@@ -1,26 +1,29 @@
 using BibleApp.Services;
 using Microsoft.Maui.Controls;
 using System.Collections.Generic;
-
-
-
+using System.Net;
 namespace BibleApp.Pages;
+
+[QueryProperty(nameof(BookId), "bookId")]
+[QueryProperty(nameof(BookName), "bookName")]
 
 public partial class ChaptersPage : ContentPage
 {
     private readonly APIService apiService = new();
-    private readonly string bookId;
-    private readonly string bookName;
+    public string BookId { get; set; }
+    public string BookName { get; set; }
 
-    public ChaptersPage(string? selectedBookId, string? selectedBookName)
+    public ChaptersPage()
     {
         InitializeComponent();
 
-        apiService = new APIService();
-        bookId = selectedBookId ?? string.Empty;
-        bookName = selectedBookName ?? "Unknown Book";
+    }
 
+    protected override void OnAppearing()
+    { 
+       base.OnAppearing();
         LoadChapters();
+    
     }
 
     private async void LoadChapters()
@@ -30,14 +33,14 @@ public partial class ChaptersPage : ContentPage
             BookTitleLabel.Text = "Loading chapters...";
 
             //Get chapters for book
-            var chapters = await apiService.GetChapters(bookId);
+            var chapters = await apiService.GetChapters(BookId);
 
             ChaptersCollectionView.ItemsSource = chapters;
-            BookTitleLabel.Text = $"Chapters in {bookName}";
+            BookTitleLabel.Text = $"Chapters in {BookName}";
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            await DisplayAlert("Error", $"Could not load chapters: {ex.Message}", "OK");
+            await DisplayAlert("Error", $"Could not load chapters: {exception.Message}", "OK");
         }
 
 
@@ -51,7 +54,9 @@ public partial class ChaptersPage : ContentPage
 
         Chapter selected = (Chapter)e.CurrentSelection[0];
         //navigate from chapter to read page
-        await Navigation.PushAsync(new ReadPage(selected.Id, selected.Reference));
+        await Shell.Current.GoToAsync($"{nameof(ReadPage)}?chapterId={selected.Id}&reference={selected.Reference}"
+);
+
 
         // remove highlight
         ((CollectionView)sender).SelectedItem = null;

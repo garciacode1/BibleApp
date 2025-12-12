@@ -36,8 +36,9 @@ public partial class BooksPage : ContentPage
         var selectedBook = e.CurrentSelection.FirstOrDefault() as Books;
 
         if (selectedBook == null)
-            return; 
-        await Navigation.PushAsync(new ChaptersPage(selectedBook.Id, selectedBook.Name));
+            return;
+        await Shell.Current.GoToAsync($"{nameof(ChaptersPage)}?bookId={selectedBook.Id}&bookName={selectedBook.Name}"
+);
         BooksCollectionView.SelectedItem = null;
     }
 

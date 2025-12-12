@@ -3,29 +3,35 @@ using BibleApp.Services;
 using BibleApp.Services.Responses;
 using System.Reflection.Metadata;
 
+[QueryProperty(nameof(ChapterId), "chapterId")]
+[QueryProperty(nameof(Reference), "reference")]
+
 public partial class ReadPage : ContentPage
 {
+    
 
     private readonly APIService api = new();
-    private readonly string chapterId;
-    private readonly string chapterRef;
 
-    public ReadPage(string chapterId, string reference)
+    public string ChapterId { get; set;}
+    public string Reference { get; set; }
+
+    public ReadPage()
     {
         InitializeComponent();
 
-        this.chapterId = chapterId;
-        this.chapterRef = reference;
+    }
 
-        LoadChapter();
-
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        LoadChapter ();
     }
 
     private async void LoadChapter()
     {
         ChapterTitleLabel.Text = "Loading chapter...";
         //api request for text
-        var chapter = await api.GetChapterText(chapterId);
+        var chapter = await api.GetChapterText(ChapterId);
         //error checking if API didnt return anything
         if (chapter == null)
         {
@@ -33,13 +39,13 @@ public partial class ReadPage : ContentPage
             return;
         }
         //title of chapter
-        ChapterTitleLabel.Text = chapter.Reference;
+        ChapterTitleLabel.Text = Reference;
         //cleaned text from html format
         string CleanedText = chapter.Content
-                                    .Replace("<p>", "")
-                                    .Replace("</p>", "")
-                                    .Replace("<span>", "")
-                                    .Replace("</span>", "");
+            .Replace("<p>", "")
+            .Replace("</p>", "")
+            .Replace("<span>", "")
+            .Replace("</span>", "");
 
         ChapterContentLabel.Text = CleanedText;
 
