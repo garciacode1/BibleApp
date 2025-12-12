@@ -1,7 +1,8 @@
 namespace BibleApp.Pages;
 using BibleApp.Services;
 using BibleApp.Services.Responses;
-using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
+using System.Net;
 
 [QueryProperty(nameof(ChapterId), "chapterId")]
 [QueryProperty(nameof(Reference), "reference")]
@@ -41,18 +42,21 @@ public partial class ReadPage : ContentPage
         //title of chapter
         ChapterTitleLabel.Text = Reference;
         //cleaned text from html format
-        string CleanedText = chapter.Content
-            .Replace("<p>", "")
-            .Replace("</p>", "")
-            .Replace("<span>", "")
-            .Replace("</span>", "");
-
+        string CleanedText = CleanHtml(chapter.Content);
         ChapterContentLabel.Text = CleanedText;
 
+    }
+    private string CleanHtml(string html)
+    {
+        if (string.IsNullOrEmpty(html)) return string.Empty;
+        //remove html tags
+        string noTags = Regex.Replace(html, "<.*?>", string.Empty);
+
+        string decoded = WebUtility.HtmlDecode(noTags);
+        return decoded.Trim();
 
 
     }
-
 
 
 
