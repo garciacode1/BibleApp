@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibleApp.Pages.ChaptersPage"
              Title="ChaptersPage">
-    <VerticalStackLayout>
-        <Label x:Name="BookTitleLabel"
+    <ScrollView>
+       <VerticalStackLayout>
+          <Label x:Name="BookTitleLabel"
                FontSize="22"
                FontAttributes="Bold"
                HorizontalOptions="Center" 
                Text="Loading chapters..." />
 
-        <CollectionView x:Name="ChaptersCollectionView"
+          <CollectionView x:Name="ChaptersCollectionView"
                         Margin="10"
                         SelectionMode="Single"
                         SelectionChanged="ChaptersCollectionView_SelectionChanged">
@@ -28,5 +29,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+       </VerticalStackLayout>
+    </ScrollView>    
 </ContentPage>
