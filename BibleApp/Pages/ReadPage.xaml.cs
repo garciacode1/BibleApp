@@ -103,11 +103,22 @@ public partial class ReadPage : ContentPage
 
     }
 
-    private void OnSwipedRight(object sender, SwipedEventArgs e) 
+    private void OnSwipedRight(object sender, SwipedEventArgs e)
     {
 
         OnPreviousClicked(sender, EventArgs.Empty);
-      
+
+    }
+
+    private void OnAddFavoriteClicked(object sender, EventArgs e)
+    {
+        FavoriteStore.Favorites.Add(new FavoriteChapter
+        {
+            ChapterId = ChapterId,
+            Reference = Reference,
+            BookId = BookId
+        });
+
     }
 
 

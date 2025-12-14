@@ -25,6 +25,9 @@
                 <Button Text="◀ Previous" Clicked="OnPreviousClicked"/>
                 <Button Text="Next ▶" Clicked="OnNextClicked"/>
             </HorizontalStackLayout>
+            <!-- Add to Favorites -->
+            <Button Text="☆ Add to Favorites" Clicked="OnAddFavoriteClicked" HorizontalOptions="Center" Margin="0,10,0,0" />
+                    
         </VerticalStackLayout>
 
 
