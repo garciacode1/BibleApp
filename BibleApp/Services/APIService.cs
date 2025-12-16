@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
 using System.Net.Http;
 
+
 namespace BibleApp.Services
 {
     internal class APIService
     {
         const string apiKey = "47455fdb12c865888b79736cf85c5515";
         const string baseURL = "https://api.scripture.api.bible/v1/bibles";
-        const string defaultBibleId = "de4e12af7f28f599-01"; //King James (Authorised) Version
+        
 
         public APIService() { }
 
@@ -29,9 +30,11 @@ namespace BibleApp.Services
 
             try
             {
+                string bibleId = AppState.CurrentBibleId;
+
                 //Get Http Client
                 HttpClient client = new HttpClient();
-                string url = $"{baseURL}/{defaultBibleId}/books";
+                string url = $"{baseURL}/{bibleId}/books";
                 //Form a request
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
                 //Headers
@@ -70,9 +73,11 @@ namespace BibleApp.Services
         {
             try
             {
+                string bibleId = AppState.CurrentBibleId;
+
                 HttpClient client = new HttpClient();
 
-                string url = $"{baseURL}/{defaultBibleId}/books/{bookId}/chapters";
+                string url = $"{baseURL}/{bibleId}/books/{bookId}/chapters";
                 // request with headers
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
@@ -115,8 +120,10 @@ namespace BibleApp.Services
         {
             try
             {
+                string bibleId = AppState.CurrentBibleId;
+
                 HttpClient client = new HttpClient();
-                string url = $"{baseURL}/{defaultBibleId}/chapters/{chapterId}";
+                string url = $"{baseURL}/{bibleId}/chapters/{chapterId}";
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");

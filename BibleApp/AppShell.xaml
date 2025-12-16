@@ -7,10 +7,10 @@
 
     <!-- Bottom tabs for your 4 screens -->
     <TabBar>
-        <ShellContent Route = "Home" Title="Home" ContentTemplate="{DataTemplate pages:MainPage}" />
-        <ShellContent Route = "Books" Title="Books" ContentTemplate="{DataTemplate pages:BooksPage}" />
-        <ShellContent Route = "Favorites" Title="Favorites" ContentTemplate="{DataTemplate pages:FavoritesPage}" />
-        <ShellContent Route = "Settings" Title="Settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
+        <ShellContent Route="Home" Title="Home" ContentTemplate="{DataTemplate pages:MainPage}" />
+        <ShellContent Route="Books" Title="Books" ContentTemplate="{DataTemplate pages:BooksPage}" />
+        <ShellContent Route="Favorites" Title="Favorites" ContentTemplate="{DataTemplate pages:FavoritesPage}" />
+        <ShellContent Route="Settings" Title="Settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
         
         
     </TabBar>
