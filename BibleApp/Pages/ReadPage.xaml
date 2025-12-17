@@ -3,7 +3,6 @@
     x:Class="BibleApp.Pages.ReadPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="{DynamicResource PageBackgroundColor}"
     Title="Read">
 
     <ScrollView>
@@ -12,14 +11,12 @@
         <VerticalStackLayout Padding="20">
             <!--  chapter title -->
             <Label x:Name="ChapterTitleLabel"
-                   TextColor="{DynamicResource PrimaryTextColor}"
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    Text="Loading..."/>
             <!--  chapter content -->
             <Label x:Name="ChapterContentLabel"
-                   TextColor="{DynamicResource PrimaryTextColor}"
                    FontSize="18"    
                    LineBreakMode="WordWrap"
                    />

@@ -3,18 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibleApp.Pages.SettingsPage"
              Title="SettingsPage">
+    
     <Frame Padding="15"
-       CornerRadius="10"
-       BackgroundColor="{DynamicResource CardBackgroundColor}">
+       CornerRadius="10">
         <VerticalStackLayout Spacing="10">
 
             <Label Text="Bible Version"
                FontSize="18"
-               TextColor="{DynamicResource PrimaryTextColor}" />
+               />
 
-            <Picker x:Name="BibleVersionPicker"
+            <Picker x:Name="BibleVersionPicker"    
                 Title="Select Bible version"
                 SelectedIndexChanged="OnBibleVersionChanged" />
+
+            <Label Text="Themes"
+               FontSize="18" />
+
+            <Picker x:Name="ThemePicker"
+                    Title="Select Theme"
+                    SelectedIndexChanged="OnThemeChanged">
+                <Picker.Items>
+                    <x:String>Light</x:String>
+                    <x:String>Dark</x:String>
+                </Picker.Items>
+            </Picker>
+
 
         </VerticalStackLayout>
     </Frame>

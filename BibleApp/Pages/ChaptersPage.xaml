@@ -5,7 +5,7 @@
              Title="ChaptersPage">
     <ScrollView>
        <VerticalStackLayout>
-          <Label x:Name="BookTitleLabel"
+          <Label x:Name="BookTitleLabel" 
                FontSize="22"
                FontAttributes="Bold"
                HorizontalOptions="Center" 

@@ -6,12 +6,32 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
+    <!-- Page backgrounds -->
+    <Color x:Key="PageBackgroundLight">White</Color>
+    <Color x:Key="PageBackgroundDark">#121212</Color>
+
+    <!-- Card / surface -->
+    <Color x:Key="CardBackgroundLight">#F5F5DC</Color>
+    <!-- Beige -->
+    <Color x:Key="CardBackgroundDark">#1E1E1E</Color>
+
+    <!-- Text -->
+    <Color x:Key="TextPrimaryLight">Black</Color>
+    <Color x:Key="TextPrimaryDark">White</Color>
+
+    <Color x:Key="TextSecondaryLight">#666666</Color>
+    <Color x:Key="TextSecondaryDark">#AAAAAA</Color>
+
+
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Text_Light">Black</Color>
+    <Color x:Key="Text_Dark">White</Color>
+    
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

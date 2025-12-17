@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bible GPT">
+    
     <Grid>
         <!-- background image -->
         <Image Source="main_image.png"
@@ -25,6 +26,7 @@
                    TextColor="Purple"
             />
             <Label Text="Digital Bible accesible for everyone!"
+                   x:Name="Title_description"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    Margin="0,0,0,20"
@@ -38,6 +40,7 @@
                        Padding="0,30,0,0"
                        
                        
+                       
             />
            
             <!-- read sequentally space -->
@@ -47,17 +50,18 @@
                     <Label Text="Read Sequentially"
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center"
-                           FontSize="18" />
-                        <Label Text="Begin at Genesis 1 and continue chapter by chapter."
+                           FontSize="18"
+                    />
+                    <Label Text="Begin at Genesis 1 and continue chapter by chapter."
                            FontSize="14"
                             HorizontalTextAlignment="Center"
-                           TextColor="#666" />
+                    />
                     <Label FontSize="14"
-                               TextColor="#666"
                                Text="Start your journey below."
-                               HorizontalTextAlignment="Center" />
-                                        
+                               HorizontalTextAlignment="Center" 
+                      />                  
                     <Button Text="Start Reading"
+                            TextColor="White"
                             Clicked="OnReadSequentiallyClicked" />
                 </VerticalStackLayout>
             </Border>
