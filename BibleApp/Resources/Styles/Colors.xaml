@@ -12,7 +12,6 @@
 
     <!-- Card / surface -->
     <Color x:Key="CardBackgroundLight">#F5F5DC</Color>
-    <!-- Beige -->
     <Color x:Key="CardBackgroundDark">#1E1E1E</Color>
 
     <!-- Text -->

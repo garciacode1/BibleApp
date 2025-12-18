@@ -49,8 +49,7 @@ public partial class ReadPage : ContentPage
         string CleanedText = CleanHtml(chapter.Content);
         ChapterContentLabel.Text = CleanedText;
         //parse book and chapter when page loads
-        var parts = Reference.Split(' ');
-        currentChapter = int.Parse(parts.Last());
+        currentChapter = int.Parse(ChapterId.Split('.').Last());
 
 
     }
@@ -73,9 +72,7 @@ public partial class ReadPage : ContentPage
 
     private async void OnNextClicked(object sender, EventArgs e)
     {
-        if (currentChapter <= 0)
-            return;
-
+        
         currentChapter++;
 
         await Shell.Current.GoToAsync($"{nameof(ReadPage)}" + $"?bookId={BookId}" +
@@ -97,18 +94,14 @@ public partial class ReadPage : ContentPage
 
     private void OnSwipedLeft(object sender, SwipedEventArgs e)
     {
-
         OnNextClicked(sender, EventArgs.Empty);
-
-
     }
 
     private void OnSwipedRight(object sender, SwipedEventArgs e)
     {
-
         OnPreviousClicked(sender, EventArgs.Empty);
-
     }
+
 
     private void OnAddFavoriteClicked(object sender, EventArgs e)
     {

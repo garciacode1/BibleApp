@@ -44,8 +44,7 @@
             />
            
             <!-- read sequentally space -->
-            <Border Stroke="#D9D9D9" StrokeShape="RoundRectangle 12"
-                    BackgroundColor="Beige">
+            <Border Stroke="#D9D9D9" StrokeShape="RoundRectangle 12">
                 <VerticalStackLayout Padding="8" Spacing="18">
                     <Label Text="Read Sequentially"
                            FontAttributes="Bold"

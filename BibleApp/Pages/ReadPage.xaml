@@ -5,31 +5,41 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Read">
 
-    <ScrollView>
-       
+    <Grid>
+        
 
-        <VerticalStackLayout Padding="20">
-            <!--  chapter title -->
-            <Label x:Name="ChapterTitleLabel"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Text="Loading..."/>
-            <!--  chapter content -->
-            <Label x:Name="ChapterContentLabel"
-                   FontSize="18"    
-                   LineBreakMode="WordWrap"
-                   />
-            <!-- Navigation buttons -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="◀ Previous" Clicked="OnPreviousClicked"/>
-                <Button Text="Next ▶" Clicked="OnNextClicked"/>
-            </HorizontalStackLayout>
-            <!-- Add to Favorites -->
-            <Button Text="☆ Add to Favorites" Clicked="OnAddFavoriteClicked" HorizontalOptions="Center" Margin="0,10,0,0" />
-                    
-        </VerticalStackLayout>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
 
+                <Label x:Name="ChapterTitleLabel"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
 
-    </ScrollView>
+                <Label x:Name="ChapterContentLabel"
+                       FontSize="18"
+                       LineBreakMode="WordWrap">
+
+                    <Label.GestureRecognizers>
+                        <SwipeGestureRecognizer
+                         Direction="Left"
+                         Swiped="OnSwipedLeft" />
+
+                        <SwipeGestureRecognizer
+                          Direction="Right"
+                          Swiped="OnSwipedRight" />
+                    </Label.GestureRecognizers>
+
+                </Label>
+                <!-- Navigation buttons -->
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <Button Text="◀ Previous" Clicked="OnPreviousClicked"/>
+                    <Button Text="Next ▶" Clicked="OnNextClicked"/>
+                </HorizontalStackLayout>
+                <!-- Add to Favorites -->
+                <Button Text="☆ Add to Favorites" Clicked="OnAddFavoriteClicked" HorizontalOptions="Center" Margin="0,10,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
